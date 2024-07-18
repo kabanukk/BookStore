@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-title {
+            margin: 0;
+            font-size: 24px;
+        }
+        .container {
+            padding: 100px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .content-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .image-col, .form-col {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .image-col img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .form-col .card {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .card-header {
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .form-label {
+            margin-bottom: 10px;
+            display: block;
+            color: #333;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 32px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.15s;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1em;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .card-footer {
+            padding: 20px;
+            background-color: #f0f2f5;
+            border-top: 1px solid #ddd;
+            text-align: center;
+        }
+        .card-footer a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+        .card-footer a:hover {
+            color: #0056b3;
+        }
+        .alert {
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <form th:action="@{/login}" method="post">
+        <div class="container">
+            <div class="content-row">
+                <div class="form-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="fs-4 text-center">Вход</p>
+                            <div th:if="${param.registration}" class="alert alert-success">
+                                Вы успешно зарегистрировались.
+                            </div>
+                            <div th:if="${param.error}" class="alert alert-danger">
+                                Неправильное имя пользователя или пароль.
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form action="/login" method="post">
+                                <label class="form-label">Логин</label>
+                                <input class="form-control" id="username" name="username">
+                                <label class="form-label">Пароль</label>
+                                <input class="form-control" type="password" id="password" name="password">
+                                <div>
+                                    <input type="hidden" name="referer" th:value="${param.referer}" />
+                                </div>
+                                <button type="submit" class="btn">Войти</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+</body>
+</html>

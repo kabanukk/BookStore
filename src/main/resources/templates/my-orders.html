@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои заказы</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-top: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1>Мои заказы</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID заказа</th>
+        <th>Дата заказа</th>
+        <th>Общая стоимость</th>
+        <th>Детали заказа</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.orderDate}"></td>
+        <td th:text="${order.totalOrderPrice}"></td>
+        <td>
+            <ul>
+                <li th:each="item : ${order.orderItems}">
+                    <span th:text="${item.book.name}"></span> - <span th:text="${item.quantity}"></span> шт. по цене <span th:text="${item.totalPrice}"></span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
